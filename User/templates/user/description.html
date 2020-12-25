@@ -1,0 +1,60 @@
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+    {% block body %}
+
+    <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6>Back to Categories</h6></a>
+    <br>
+    <br>
+    {% for message in messages %}
+        <h5><p style="color: whitesmoke;">{{ message }}</p></h5>
+    {%endfor%}
+    <br>
+    <br>
+
+    {% for brand in des %}
+
+        <div class="row">
+            <div class="col-md-1 offset-md-3">
+                <img class="card" width="100px" height="100px" src="{{ brand.beverage_image }}"/>
+            </div>
+            <div class="col-md-3" style="text-align: center;">
+                
+                <h4 style="color: whitesmoke;">{{ brand.beverage_name }}</h4>
+                <h4 style="color: whitesmoke;"> ₹ {{ brand.beverage_price }}</h4>
+            </div>
+            <div class="col-md-1">
+                <br>
+
+                <a href="{% url 'User:detaildesc' brand.id %}" class="btn btn-success" style="background-color: tomato;"> Details</a>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col-md-2">
+                <br>
+                <button data-brand="{{ brand.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" style="background-color: tomato;">Add to cart</button>
+            </div>
+            {% endif %}
+        </div>
+        <br>
+    
+    {% endfor %}
+    
+    {% endblock %}
+
+    {% block javascript %}
+        <script>
+            $ajax({
+                url:'{% url "User:cart" %}',
+            });
+        </script>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6>Categories</h6></a>
+    {% else %}
+        <a class="btn btn-success" href="{% url 'User:checkpage' %}" style="background-color: tomato;"><h6>Home page</h6></a>
+    {% endif %}
+
+    <div class="row" style="color: whitesmoke;">
+        <div class="col-md-6 offset-md-4">
+            <h3>For any complaints feel free to write to us at</h3><br>
+            <h4>Name : Sannagiri Raviteja</h4>
+            <h4>Email : yardwine2020@gmail.com</h4>
+            <h4>Office addresss : H.No:401B, RKR Enclave</h4>
+            <h4>Hasthinapuram</h4>
+            <h4>500079, Hyderabad</h4>
+            <h4>Telangana, India</h4>
+        </div>
+    </div>  
+    {% endblock %}
+</body>
+</html>

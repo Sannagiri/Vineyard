@@ -1,0 +1,48 @@
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+    {% block body %}
+
+    
+    
+    {% for brand in detaildesc %}
+    <a class="btn btn-success" href="{% url 'User:description' brand.category.id %}" style="background-color: tomato;"><h6>Go Back</h6></a>
+    <br>
+    <br>
+    <br>
+    
+        <div class="row">
+            <div class="col-md-0 offset-md-2">
+                <img class="card" width="200px" height="200px" src="{{ brand.beverage_image }}"/>
+            </div>
+            <div class="col-md-6" style="text-align: center;">
+                <br>
+                <h1 style="color: whitesmoke;">{{ brand.beverage_name }}</h1><br>
+                <h4 style="color: whitesmoke;">{{ brand.beverage_desc }}</h4>
+                <h4 style="color: whitesmoke;"> ₹ {{ brand.beverage_price }} *(Inclusive GST)</h4>
+                <br>
+                {% if user.is_authenticated %}
+                <a href="{% url 'User:profile' brand.id user.id %}" class="btn btn-success" style="background-color: tomato;"> BUY NOW</a>
+                {% endif %}
+            </div>
+            <!-- <div class="col-md-2">
+                <br>
+                <a href="#" class="btn btn-success" style="background-color: tomato;"> BUY NOW</a>
+            </div> -->
+
+        </div>
+        <br>
+    
+    {% endfor %}
+    
+    {% endblock %}
+</body>
+</html>

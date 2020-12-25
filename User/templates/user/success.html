@@ -1,0 +1,23 @@
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+    <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6>Back to Categories</h6></a>
+    <br>
+    <br>
+    <div class="col-md-9 offset-md-5">
+        <h4 style="color: whitesmoke;" style="text-align: center;">
+            Thank you
+        </h4><br>
+        <h4 style="color: whitesmoke;" style="text-align: center;">Your order has been placed </h4>
+        <h4 style="color: whitesmoke;" style="text-align: center;">Confirmation has been sent to registered mail address</h4>
+    </div>
+    {% endblock %}
+</body>
+</html>

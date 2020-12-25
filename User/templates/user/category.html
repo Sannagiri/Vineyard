@@ -1,0 +1,30 @@
+
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% block body %}
+    {% for message in messages %}
+        <h5><p style="color: whitesmoke;">{{ message }}</p></h5>
+    {%endfor%}
+        {% for category in category_list %}
+        <br>
+        
+            <div class="row1">
+                <div class="col-md-8 offset-md-2" style="text-align: center;" >
+                    <h4><a class="btn btn-info" style="background-color: transparent;" style="color: whitesmoke;" href = "{% url 'User:description' category.id %}">{{ category.category_name }}</a></h4>
+                    <br>
+                    
+                </div>
+
+            </div>
+        {% endfor %}
+    {% endblock %}
+</body>
+</html>

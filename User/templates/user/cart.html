@@ -1,0 +1,93 @@
+{% extends 'user/source.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .user_card1 {
+            width: 1500px;
+			margin-top: auto;
+			margin-bottom: auto;
+			position:absolute;
+			display: flex;
+            /* background-color: black; */
+			justify-content: center;
+			flex-direction: column;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+            padding: 20px;
+            color: whitesmoke;
+		}
+        
+
+
+    </style>
+</head>
+<body>
+    {% block body %}
+
+    {% if order.get_cart_items >= 1 %}
+        <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6> Continue Shopping</h6></a><br>
+        <div  class="container h-20 width-1000">
+            <div class="d-flex justify-content-center h-20 width-1000">
+                <div class="user_card1" style="color: whitesmoke;">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>Items : {{ order.get_cart_items }}</h4>
+                            <h4>Total amount : ₹ {{ order.get_cart_total }}</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <br>
+                            <a href="{% url 'User:checkoutprofile' user.id %}" class="btn btn-success" style="background-color: tomato;"> checkout </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        <br>
+        <br>
+        
+        {% for item in items %}
+                <div class="row">            
+                    <div class="col-md-2 offset-md-1">                
+                            <img class="card" width="150px" height="150px" src="{{ item.beverage.beverage_image }}"/> 
+                    </div>
+                    <div class="col-md-3">
+                        <h4 style="color: whitesmoke;">{{ item.beverage.beverage_name }}</h4>
+                        <h4 style="color: whitesmoke;"> ₹ {{ item.get_total }} *(Inclusive GST)</h4>
+                        <h4 style="color: whitesmoke;">Quantity : {{item.quantity}}</h4>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <br>
+                        <a href="{% url 'User:deletefromcart' item.id %}" class="btn btn-success" style="background-color: tomato;"> Delete </a>
+                    </div>           
+                </div>
+                <br>
+        {% endfor %}
+    {% else %}
+        <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6> Continue Shopping</h6></a><br>
+        <br>
+            <br>
+
+            <div class="col-md-9 offset-md-5">
+                <h4 style="color: whitesmoke;">No Items in the cart</h4>
+            </div>
+            
+        
+    {% endif %}
+    {% endblock %}
+</body>
+</html>
+
+
+

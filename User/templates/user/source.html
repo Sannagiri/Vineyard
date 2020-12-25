@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+        function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken')
+    </script>   
+
+
+    <title>Document</title>
+    <style>
+        body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background:url("https://i.pinimg.com/originals/82/21/d8/8221d88bcbcc33c7188b60642e39340b.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+        }
+        .user_card {
+            width: 100px;
+			margin-top: auto;
+			margin-bottom: auto;
+			position: relative;
+			display: flex;
+            /* background-color: black; */
+			justify-content: center;
+			flex-direction: column;
+			/* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+			border-radius: 5px;
+            padding: 0px;
+		}
+        
+        .navbar{
+            
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+
+        ul{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            position: absolute;
+            z-index: 100;
+        }
+        ul li{
+            float: left;
+            width: 170px;
+            /* opacity: .8; */
+            line-height: 60px;
+            text-align: center;
+        }
+    
+        ul li a{
+            text-decoration: none;
+            display: block;
+        }
+        ul li a:hover{
+            background-color: black;
+            border-radius: 20px;
+        }
+
+
+        ul li ul li{
+            display: none;
+        }
+        ul li:hover ul li{
+            display: block;
+        }
+
+        #cart-total{
+            display: block;
+            text-align: center;
+            color:#fff;
+            background-color: red;
+            width: 20px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+    
+<!-- <h3>Logo is under maintenance</h3> -->
+<body>
+            <br>
+            
+            <div class="row">
+                <div class="col-md-8 offset-md-4">
+                    <img width="400px" height="115px" src="{% static 'images/logo.png' %}"/>
+                </div>
+
+            </div>
+
+</body>    
+
+
+
+<body>
+    <nav class="navbar navbar-floralwhite bg-floralwhite">
+        <!-- later make to login page -->
+        <a href="#" class="navbar-brand"></a> 
+        <div class="navbar">
+            {% if user.is_authenticated %}
+            <div>
+                <span style="color: whitesmoke;"><h4>Hello, {{ request.user }}</h4></span>
+                
+                
+            </div>
+            <div>
+                <span><img src="https://coastalchristian.org/wp-content/uploads/2017/10/spacer-image.png" width="40px" height="10px" alt=""></span>
+            </div>
+            <div>
+                <span>
+                    <a href="{% url 'User:cart' %}" style="opacity: .8;">
+                        <img width="28px" height="28px" src="https://previews.123rf.com/images/miceking/miceking1701/miceking170100562/69057961-shopping-cart-symbol.jpg">
+                    </a>
+                    
+                </span>
+            </div>
+            <div>
+                <p id="cart-total">{{ cartitems }}</p>
+            </div>
+            <br>
+            <div>
+                
+            </div>
+            <div class="user_card">
+                <ul>
+                    <li><img width="30px" height="30px" style="opacity: 0.8;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSqpLsyuOEJ7qV_hjwfO-dwq0SUDTeBD2Vvxw&usqp=CAU">
+                       
+                        <ul>
+                            <li><a class="nav-item nav-link"  href="{% url 'User:updateprofile' %}" style="color:whitesmoke"><h6>Profile</h6></a></li>                
+                            <li><a class="nav-item nav-link"  href="{% url 'User:changepassword' %}" style="color:whitesmoke"><h6>Change password</h6></a></li>
+                            <li><a class="nav-item nav-link"  href="{% url 'User:aboutus' %}" style="color:whitesmoke"><h6>About Us</h6></a></li>
+                            <li><a class="nav-item nav-link" href="{% url 'User:logout' %}" style="color: whitesmoke;"><h6>Logout</h6></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            {% else %}
+            <div class="user_card">
+                <a class="nav-item nav-link px-10" href="{% url 'User:login' %}" style="color: whitesmoke"><h4>Login</h4></a>
+            </div>
+            {% endif %}
+            
+        </div>
+
+    </nav>
+
+    {% block body %}
+        
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 
+    crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" 
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" 
+    crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}    
+
+</body>
+</html>
+
+
+
+
+
+

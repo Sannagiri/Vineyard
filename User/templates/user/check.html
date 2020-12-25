@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+    <style>
+        body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background:url("https://i.pinimg.com/originals/82/21/d8/8221d88bcbcc33c7188b60642e39340b.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .user_card {
+			width: 100px;
+			margin-top: auto;
+			margin-bottom: auto;
+			position: relative;
+			display: flex;
+            background-color: black;
+			justify-content: center;
+			flex-direction: column;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+        .navbar{
+            
+            padding-right: 30px;
+            padding-left: 50px;
+        }
+    </style>
+</head>
+
+    
+<!-- <h3>Logo is under maintenance</h3> -->
+<body>
+            <br>
+            
+            <div class="row">
+                <div class="col-md-8 offset-md-4">
+                    <img width="400px" height="115px" src="{% static 'images/logo.png' %}"/>
+                    
+                </div>
+            </div>
+
+</body>    
+
+
+
+<body>
+    <nav class="navbar navbar-floralwhite bg-floralwhite">
+        <!-- later make to login page -->
+        <a href="#" class="navbar-brand"></a> 
+        <div class="navbar">
+            <div>
+                <a class="nav-item nav-link px-10" href="{% url 'User:category' %}" style="color: whitesmoke"><h4>Explore Us</h4></a>
+            </div>
+            <div class="user_card">               
+                <a class="nav-item nav-link px-10" href="{% url 'User:login' %}" style="color: whitesmoke"><h4>Login</h4></a>
+            </div>      
+            <div class="user_card">
+                <a class="nav-item nav-link"  href="{% url 'User:aboutus' %}" style="color:whitesmoke"><h4>AboutUs</h4></a>
+            </div>
+            
+            
+        </div>
+
+    </nav>
+
+
+    {% block body %}
+    <body>
+        <br>
+        <h5 style="color: whitesmoke;">
+            <p style="text-align:Center" >
+                DRIKING IS INJURIOUS TO HEALTH "BUT" GOOD IF IN LIMITS
+            </p>
+        </h5>
+        <br>
+        <div class="row">
+            <div class="col-md-1 offset-md-1">
+                <img width="100px" height="108px" src="https://images.unsplash.com/photo-1544776527-68e63addedf7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/>
+                <br><br>             
+                <img width="100px" height="100px" src="https://thewhiskeywash.com/wp-content/uploads/2016/08/open-whiskey.jpg"/>
+                <br><br>
+                <img width="100px" height="105px" src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/06/21/11/best-vodka-indybest-1.jpg"/>
+                <br><br>
+                <img width="100px" height="100px" src="https://assets.visitmilwaukee.org/visitmke/media/global/Partner%20Images/Gallery%20Size/VM-ThirdSpaceBrewing-Beers.jpg?ext=.jpg&mode=crop&width=1920&height=1080&scale=both"/>
+            
+            </div>            
+            <div class="col-md-9 " style="color: whitesmoke;">
+                <h5>WINE</h5>
+                <h6>
+                    <p>
+                        Wine is an alcoholic beverage which is originally made from fermented grapes. Later on, people also use other fermented fruits to make wine.
+                        The earliest evidence of the existence of wine is in Georgia. People found old wine jars of 8000 years old.
+                        Due to its intoxicating effects on drinkers, wine was loved endlessly. Wine was an irreplaceable part of parties and any kinds of celebration. 
+                    </p>
+                    
+                </h6>
+                <br>
+                <h5>WHISKEY</h5>
+                <h6>
+                    <p>
+                        Whiskey is recognized as the world’s 1st spirit. It is umbrella term for alcoholic beverages.
+                        Whiskey originated in Ireland in the fifth century, but later  Scotch whiskey dominated the world market.
+                        Whiskey is made from grain, water, and yeast. The quality of each gives whiskey its different flavors.
+                    </p>
+                    <p>
+                        
+                        Types of Whiskey are : Scotch whiskey, Irish whiskey, Canadian whiskey, American whiskey, Bourbon, Tennesse whiskey, Rye whiskey.
+                    </p>
+                    
+                </h6>
+                <h5>VODKA</h5>
+                <h6>
+                    <p>
+                        A type of distilled liquor designated by the Russian word vodka came to Russia in the late 14th century. 
+                        In 1386, the Genoese ambassadors brought the first aqua vitae ("the water of life") to Moscow and presented it to Grand Duke Dmitry Donskoy. 
+                        Vodka is traditionally drunk "neat" or "straight", although it is often served freezer chilled in the vodka belt of Belarus, Estonia, Finland, Iceland, Lithuania, Latvia, Norway, Poland, Russia, Sweden, and Ukraine.
+                        
+                    </p>
+                </h6><br>
+                <h5>BEER</h5>
+                <h6>
+                    <p>
+                        Beer is one of the oldest and most widely consumed alcoholic drinks in the world, and the third most popular drink overall after water and tea.
+                        After the introduction of hops into England from Flanders in the 15th century, "ale" referred to an unhopped fermented drink, "beer" being used to describe a brew with an infusion of hops.
+                        The process of making beer is known as brewing. A dedicated building for the making of beer is called a brewery.
+                    </p>
+                </h6> <br><br><br>
+                <h4>
+                    <p>
+                        THERE ARE MANY WAITING TO REACH AT YOUR DOOR STEP -- LOGIN AND GET YOUR CHOICES
+                    </p>
+                </h4><br><br><br><br><br>
+                
+                
+        </div> 
+    </body>    
+    {% endblock %}
+
+    
+    
+</body>
+</html>

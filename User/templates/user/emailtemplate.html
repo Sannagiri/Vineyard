@@ -1,0 +1,32 @@
+Dear Customer,
+
+Take this as gratitude for ordering through wineyard. 
+
+Summary of your order
+
+{% for profiles in profile %}
+Shipment details:
+
+Name : {{profiles.user.username}}
+Address line1 : {{ profiles.addressline1 }}
+Address line2 : {{ profiles.addressline2 }}
+Mobile Number : {{ profiles.mobilenumber }}
+State : {{ profiles.state }}
+Pincode : {{ profiles.pincode }}
+{%endfor%}
+Order details:
+{%for items in item %}
+Product Name : {{ items.beverage_name }}
+Product Price : ₹ {{ items.beverage_price }}
+
+Total payable amount : ₹ {{ items.beverage_price }}
+
+{%endfor%}
+
+Mode of Payment : Cash on Delivery (COD)
+
+The order is expected to deliver in next 2 hours.
+
+Thanks & Regards
+wineyard
+yardwine2020@gmail.com

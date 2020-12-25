@@ -1,0 +1,48 @@
+{% extends 'user/source.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+    <a class="btn btn-success" href="{% url 'User:category' %}" style="background-color: tomato;"><h6>Back to Categories</h6></a>
+    <br>
+    <div class="row">
+        <div class="col-md-6 offset-md-2">
+                <h2 style="color: whitesmoke;">Payment Type : </h2>
+                <h4 style="color: whitesmoke;">Cash On Delivery (COD) </h4>
+                <br>
+                <h2 style="color: whitesmoke;">Shipment Details : </h2>
+                {% for profiles in profile %}
+                <h4 style="color: whitesmoke;">Name : {{ profiles.user.username }}</h4>
+                <h4 style="color: whitesmoke;">Email : {{ profiles.user.email }}</h4>
+                <h4 style="color: whitesmoke;">Address line 1 : {{ profiles.addressline1 }}</h4>
+                <h4 style="color: whitesmoke;">Address line 2 : {{ profiles.addressline2 }}</h4>
+                <h4 style="color: whitesmoke;">Mobile Number : {{ profiles.mobilenumber }}</h4>
+                <h4 style="color: whitesmoke;">{{ profiles.state }}, {{ profiles.pincode }}</h4>
+                {% endfor %}
+                <a href="{% url 'User:checkoutprofile' user.id %}" class="btn btn-success" style="background-color: tomato;">Edit</a>
+                <br>
+                <h2 style="color: whitesmoke;">Order Details : </h2>
+                {% for item in items %}
+                <h4 style="color: whitesmoke;">{{ item.beverage.beverage_name }}</h4>          
+                <h4 style="color: whitesmoke;"> ₹ {{ item.get_total }} *(Inclusive GST)</h4>
+                <h4 style="color: whitesmoke;">Quantity : {{item.quantity}}</h4>
+                <br>
+                {% endfor %}
+                <h4 style="color: whitesmoke;">Total Payable amount : ₹ {{ order.get_cart_total }}</h4><br>
+                <br>
+
+                <a href="{% url 'User:cartsuccess' user.id %}" class="btn btn-success" style="background-color: tomato;"> Confirm Order </a>
+                <br>
+                <br>
+                
+        </div>
+    </div>
+    
+    {% endblock %}
+</body>
+</html>
