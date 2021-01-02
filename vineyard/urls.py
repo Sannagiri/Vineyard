@@ -20,10 +20,20 @@ from django.conf import settings
 from User import views
 
 urlpatterns = [
+    # admin url for accessing the sqlite in server with global username and global password
     path('admin/', admin.site.urls),
+
+    # for accessing all other urls to remain in the application
     path('',include('User.urls')),
+
+    # for accessing the authorization urls like email and many other
     path('',include('django.contrib.auth.urls')),
+
+    # functionality of Cart by involving the javascript
     path('updateitem/',views.updateItem,name='updateitem'),
+
+
+    # adding the static root as we cannot give the static files separately
 ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,25 +5,42 @@ from django.contrib.auth import views as auth_views
 app_name = 'User'
 
 urlpatterns =[
+    # Home page 
     path('',views.checkpage,name='checkpage'),
+
+    # Registration of new user
     path('register/',views.RegisterPage,name='register'),
+
+    # User login page if existing or can register using sign up 
     path('login/',views.LoginPage,name='login'),
+
+    # logout or signing off
     path('logout/',views.Logout,name='logout'),
     
     # main page starting
+    # Displays all the categories available
     path('category/',views.categorypage,name='category'),
 
-    # description page
+    # Description of particular category  
     path('description/<int:id>/',views.descriptionpage, name='description'),
+
+    # Description of particular item
     path('detaildesc/<int:id>/',views.detaildescpage,name='detaildesc'),
     
-    #Buy now option id1 = brand id and id2 = user id
+    # Checking out each item 
     path('buynow/<int:id1>/<int:id2>',views.buynowpage,name='buynow'),
+
+    # Checking out all the items added to the cart
     path('cartbuynow/<int:id>/',views.cartbuynow,name="cartbuynow"),
 
     # profile page id1 = brand id and id2 = user id
+    # Checking your profile details and can edit if any changes applicable
     path('profile/<int:id1>/<int:id2>/',views.profilepage,name="profile"),
+
+    # Update the personal details of the user
     path('updateprofile/',views.updateprofpage,name="updateprofile"),
+
+    # checking the details of user at the time of checkout
     path('checkoutprofile/<int:id>/',views.checkoutprofilepage,name='checkoutprofile'),
 
     # about us link

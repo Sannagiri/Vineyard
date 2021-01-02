@@ -4,11 +4,13 @@ from django.core.validators import RegexValidator
 from django.db.models.signals import post_save
 # Create your models here.
 
+# Table containing the categories of the alcohol
 class Category(models.Model):
     def __str__(self):
         return self.category_name
     category_name = models.CharField(max_length=200)
 
+# Holds the information of each item for respective category with following details
 class Beverage(models.Model):
     category = models.ForeignKey(Category,null=True,blank=True,on_delete=models.SET_NULL)
     beverage_name =  models.CharField(max_length = 200)
@@ -19,6 +21,8 @@ class Beverage(models.Model):
     def __str__(self):
         return self.beverage_name
 
+# creates the profile with following fields automatically for registered user 
+# needs to be updated at different places of application
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     addressline1 = models.CharField(max_length = 200)
@@ -36,7 +40,7 @@ def create_profile(sender, **kwargs):
 
 post_save.connect(create_profile, sender=User)
     
-
+# Holds the information of the ordered items (multiple) from cart functionality
 class Order(models.Model):
     user1 = models.ForeignKey(User, on_delete=models.SET_NULL,blank=True,null=True)
     complete = models.BooleanField(default=False,null=True,blank=True)
@@ -56,6 +60,7 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         return total
 
+# holds the information of single order other than cart
 class OrderItem(models.Model):
     beverage = models.ForeignKey(Beverage,on_delete=models.SET_NULL,blank=True,null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)

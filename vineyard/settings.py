@@ -130,6 +130,8 @@ USE_TZ = True
 # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # REPOSITORY_ROOT = os.path.dirname(BASE_DIR)
 
+# Static root paths for the Javascript implementation and 
+# static files 
 STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
@@ -143,6 +145,8 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
+# Authentication of gmail for acknowledging 
+# the User and User orders
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

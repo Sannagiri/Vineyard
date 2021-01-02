@@ -17,6 +17,8 @@ from django.template.loader import render_to_string
  
 
 # Create your views here.
+
+# Checking page 
 # this first command restricts from back button keep on above evry page u need to 
 @login_required(login_url='User:login')
 def Homepage(request):
@@ -25,7 +27,7 @@ def Homepage(request):
     }
     return render(request, 'User/base.html',context)
 
-
+# Registration of User using the forms
 def RegisterPage(request):
     # if request.user.is_authenticated: 
     # retrun home page 
@@ -54,7 +56,7 @@ def RegisterPage(request):
     }
     return render(request,'user/register.html',context)
 
-
+# Login page
 def LoginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -73,17 +75,19 @@ def LoginPage(request):
     }
     return render(request,'user/login.html',context)
 
+# logout page
 def Logout(request):
     logout(request)
     return redirect('User:login')
 
-
+# start page
 def checkpage(request):
     context={
 
     }
     return render(request, 'user/check.html',context)
 
+# Retrieving the information from the models and displaying all categories
 def categorypage(request):
     category_list=Category.objects.all()
     if request.user.is_authenticated:
@@ -100,6 +104,7 @@ def categorypage(request):
     return render(request, 'user/category.html',context)
 
 
+# Retrieving the information from the models and displaying respective category items
 def descriptionpage(request,id): 
     des = Beverage.objects.filter(category__id = id)
     if request.user.is_authenticated:
@@ -114,7 +119,7 @@ def descriptionpage(request,id):
     }
     return render(request,'user/description.html',context)
 
-
+# detail description of the respective item
 def detaildescpage(request,id):
     detaildesc = Beverage.objects.filter(id=id)
     if request.user.is_authenticated:
@@ -131,6 +136,7 @@ def detaildescpage(request,id):
     }
     return render(request,'user/detaildesc.html',context)
 
+# Commiting the changes for the user profile 
 def updateprofpage(request):
     if request.method == 'POST':
         u_form = UserUpdateform(request.POST, instance=request.user)
@@ -151,12 +157,14 @@ def updateprofpage(request):
     }
     return render(request,'user/updateprof.html',context)
 
+# contact us
 def contactuspage(request):
     context={
 
     }
     return render(request,'user/aboutus.html',context)
 
+# Displays the profile of the User using forms, if only signed in as the user
 @login_required(login_url='User:login')
 def profilepage(request,id1,id2):
 
@@ -179,6 +187,7 @@ def profilepage(request,id1,id2):
     }
     return render(request,'user/updateprofile.html',context)
 
+# profile page of the User for checking out the order
 def checkoutprofilepage(request,id):
     if request.method == 'POST':
         u_form = UserUpdateform(request.POST, instance=request.user)
@@ -199,6 +208,7 @@ def checkoutprofilepage(request,id):
     }
     return render(request,'user/updateprofile.html',context)
 
+# Buy now option for the Cart functionality (Multiple items)
 def cartbuynow(request,id):
     profile = Profile.objects.filter(user__id = id)
     customer = request.user
@@ -213,6 +223,7 @@ def cartbuynow(request,id):
     }
     return render(request,'user/cartbuynow.html',context)
 
+# Buy now option for the single item
 @login_required(login_url='User:login')
 def buynowpage(request,id1,id2):
     buy = Beverage.objects.filter(id=id1)
@@ -227,7 +238,7 @@ def buynowpage(request,id1,id2):
     } 
     return render(request,'user/buynow.html',context)
 
-
+# Displays the cart details with required fields
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -243,7 +254,7 @@ def cart(request):
     }
     return render(request,'user/cart.html',context)
 
-
+# adding the item to the cart or the deleting from the cart manages in this section
 def updateItem(request):
     data = json.loads(request.body)
     brandId = data['brandId']
@@ -269,6 +280,7 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
     # return redirect('User:cart')
 
+# RESET PASSWORD
 def changepassword(request):
     if request.method=="POST":
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -293,6 +305,7 @@ def deletefromcart(request,id):
     item.delete()
     return redirect('User:cart')
 
+# Single item - Order confirmation through E-mail
 def successpage(request,id1,id2):
     item = Beverage.objects.filter(id=id1)
     profile = Profile.objects.filter(user__id = id2)
@@ -316,6 +329,7 @@ def successpage(request,id1,id2):
     }
     return render(request,'user/success.html',context)
 
+# Cart items - order confirmation through E-mail
 def cartsuccesspage(request,id):
     profile = Profile.objects.filter(user__id = id)
     customer = request.user
